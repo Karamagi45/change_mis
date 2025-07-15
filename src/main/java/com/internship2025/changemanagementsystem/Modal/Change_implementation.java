@@ -3,7 +3,7 @@ package com.internship2025.changemanagementsystem.Modal;
 import lombok.Data;
 
 @Data
-public class change_implementation {
+public class Change_implementation {
 
    private Integer change_implementation_id ;
    private String date_time_implementation;

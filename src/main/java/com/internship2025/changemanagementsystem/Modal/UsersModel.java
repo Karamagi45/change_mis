@@ -3,7 +3,7 @@ package com.internship2025.changemanagementsystem.Modal;
 import lombok.Data;
 
 @Data
-public class users {
+public class UsersModel {
 
    private Integer user_id ;
    private String fullName;
@@ -14,3 +14,4 @@ public class users {
    private Integer phone;
 
 }
+

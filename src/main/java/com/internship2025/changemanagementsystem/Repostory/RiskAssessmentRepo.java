@@ -1,7 +1,6 @@
 package com.internship2025.changemanagementsystem.Repostory;
 
-import com.internship2025.changemanagementsystem.Modal.risk_assessment;
-import com.internship2025.changemanagementsystem.Modal.users;
+import com.internship2025.changemanagementsystem.Modal.Risk_assessment;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,15 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class riskAssessmentRepo {
+public class RiskAssessmentRepo {
 
     private  final  JdbcTemplate jdbcTemplate;
 
-    public riskAssessmentRepo(JdbcTemplate jdbcTemplate) {
+    public RiskAssessmentRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public boolean saveRisks(risk_assessment assessments) {
+    public boolean saveRisks(Risk_assessment assessments) {
 
         String sql = "insert into  risk_assessment( identified_risk, risk_occurance) values (?,?)";
 
@@ -26,9 +25,9 @@ public class riskAssessmentRepo {
     }
 
 
-    public List<risk_assessment> findAll() {
+    public List<Risk_assessment> findAll() {
         String sql = "select * from risk_assessment";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(risk_assessment.class));
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Risk_assessment.class));
     }
 
 

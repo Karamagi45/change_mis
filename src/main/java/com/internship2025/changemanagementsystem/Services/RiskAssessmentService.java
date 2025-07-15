@@ -2,23 +2,22 @@ package com.internship2025.changemanagementsystem.Services;
 
 import com.internship2025.changemanagementsystem.Interfaces.Constant;
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
-import com.internship2025.changemanagementsystem.Modal.risk_assessment;
-import com.internship2025.changemanagementsystem.Modal.users;
-import com.internship2025.changemanagementsystem.Repostory.riskAssessmentRepo;
+import com.internship2025.changemanagementsystem.Modal.Risk_assessment;
+import com.internship2025.changemanagementsystem.Repostory.RiskAssessmentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class riskAssessmentService  implements Constant {
+public class RiskAssessmentService implements Constant {
 
-    private final riskAssessmentRepo riskAssessmentRepo;
+    private final RiskAssessmentRepo riskAssessmentRepo;
 
-    public riskAssessmentService(riskAssessmentRepo riskAssessmentRepo) {
+    public RiskAssessmentService(RiskAssessmentRepo riskAssessmentRepo) {
         this.riskAssessmentRepo = riskAssessmentRepo;
     }
 
-    public ApiResponse<?> saveRisks(risk_assessment assessments) {
+    public ApiResponse<?> saveRisks(Risk_assessment assessments) {
         try {
             boolean results = riskAssessmentRepo.saveRisks(assessments);
             if (results) {
@@ -41,7 +40,7 @@ public class riskAssessmentService  implements Constant {
     public ApiResponse<?> findAllRiskAssessment(){
         try {
 
-          List<risk_assessment> riskAssessment = riskAssessmentRepo.findAll();
+          List<Risk_assessment> riskAssessment = riskAssessmentRepo.findAll();
 
           if(!riskAssessment.isEmpty()){
 

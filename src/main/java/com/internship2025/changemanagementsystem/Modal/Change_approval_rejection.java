@@ -1,6 +1,6 @@
 package com.internship2025.changemanagementsystem.Modal;
 
-public class change_approval_rejection {
+public class Change_approval_rejection {
 
    private boolean change_request_status ;
    private String comments;
