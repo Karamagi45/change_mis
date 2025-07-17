@@ -26,13 +26,7 @@ public class UsersRepo {
 
     }
 
-    public UsersModel getAllUsers(String email) {
-        String sql = "select * from users where email = ?";
 
-        return  jdbcTemplate.queryForObject(sql,
-                new BeanPropertyRowMapper<>(UsersModel.class),email);
-
-    }
     public List<LoginUser> login (String email,String password) {
         String sql = "select * from users  where email = ? and password = ?";
        List<LoginUser> cred = jdbcTemplate.query(sql,

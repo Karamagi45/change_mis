@@ -23,12 +23,6 @@ public class UsersController {
        return usersService.findUsers();
     }
 
-
-    @GetMapping("/selectUserByEmail/{email}")
-    public ApiResponse selectUserByEmail(@PathVariable String email) {
-        return usersService.selectUserByEmail(email);
-    }
-
     @PostMapping("login")
     public ApiResponse<?> login(@RequestBody LoginUser request){
         return  usersService.login(request);
@@ -45,9 +39,6 @@ public class UsersController {
         return usersService.validateLogin(user);
     }
 
-   @GetMapping("generateOTP")
-    public Object generateOTP(){
-        return  usersService.generateOTP();
-    }
+
 
 }

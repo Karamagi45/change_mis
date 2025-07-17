@@ -6,6 +6,8 @@ import com.internship2025.changemanagementsystem.Repostory.UsersRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Slf4j
@@ -36,30 +38,11 @@ public class UserService implements Constant {
         }
     }
 
-
-
-    public ApiResponse<?> selectUserByEmail(String email) {
-        try {
-
-            UsersModel usersModel = usersRepo.getAllUsers(email);
-            if (usersModel != null) {
-                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
-            } else
-                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
-
-        }catch (Exception e){
-            log.error(e.getMessage(), e);
-            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
-        }
-
-    }
-
-
     public ApiResponse<?> login(LoginUser  loginUser) {
 
         List<LoginUser> response = usersRepo.login(loginUser.getEmail(), loginUser.getPassword());
         if(response == null){
-            return ApiResponse.builder().code(99)
+            return ApiResponse.builder().code(FAILED_CODE)
                     .message("Incorrect credentials").build();
         } else
             return ApiResponse.builder().code(SUCCESS_CODE).
@@ -79,7 +62,7 @@ public class UserService implements Constant {
 
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return  ApiResponse.builder().message(EXCEPTION_MESSAGE).build();
+            return  ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
 
@@ -102,14 +85,9 @@ public class UserService implements Constant {
             return  ApiResponse.builder().message(EXCEPTION_MESSAGE).build();
         }
     }
-    public  Object generateOTP() {
-        String otp = "";
-        for (int i = 0; i<6; i++) {
-            otp += (int)(Math.random() * 10);
-        }
-        System.out.println("otp generated: " + otp);
-        return otp;
-    }
+
+
+
 
 
 }
