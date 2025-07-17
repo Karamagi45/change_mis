@@ -32,7 +32,6 @@ public class ForgetPasswordService implements Constant {
         this.usersRepo = usersRepo;
     }
 
-
     public ApiResponse<?> validateOtpByEmail(OtpModel otpModel) {
         try {
             List<OtpModel> otpResponse = forgetPasswordRepo
@@ -45,7 +44,7 @@ public class ForgetPasswordService implements Constant {
                     return ApiResponse.builder().code(FAILED_CODE).message("otp is expired").build();
                 } else {
                     boolean expired = forgetPasswordRepo.expiredOtpByStatus(otpModel);
-                    if(expired){
+                    if (expired) {
                         return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
                     } else
                         return ApiResponse.builder().code(FAILED_CODE).message("Failed to update OTP Status").build();
@@ -58,23 +57,6 @@ public class ForgetPasswordService implements Constant {
 
     }
 
-//    public String otpExist(OtpModel otpModel) {
-//        LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime currentDateTime = LocalDateTime.now();
-//        ;
-//        if (currentDateTime.plusMinutes(5).isBefore(now)) {
-//
-//            otpModel.setStatus("Expired");
-//            //  return "Expired";
-//        } else {
-//            otpModel.setStatus("Pending");
-//            //return "Pending";
-//        }
-//        forgetPasswordRepo.updateOtpBystatus(otpModel);
-//        return "Success";
-//    }
-
-
     public ApiResponse<?> forgetPassword(String email) {
         try {
 
@@ -82,14 +64,12 @@ public class ForgetPasswordService implements Constant {
                 return ApiResponse.builder().code(FAILED_CODE)
                         .message("email is incorrect").build();
             }
-
             UsersModel usersModel = usersRepo.findUserByEmail(email.trim());
             if (usersModel == null) {
                 return ApiResponse.builder().code(FAILED_CODE)
                         .message("Email doesn't exist").build();
             } else {
                 Integer generatedOTP = OTPNumber();
-
                 OtpModel otpModel = new OtpModel();
                 otpModel.setEmail(email);
                 otpModel.setOtpCode(generatedOTP);
@@ -109,6 +89,38 @@ public class ForgetPasswordService implements Constant {
     public Integer OTPNumber() {
         return 100000 + (int) (Math.random() * 900000); // Generates a number between 100000 and 999999
     }
+
+
+    public ApiResponse<?> updatePassword(UsersModel usersModel) {
+        try {
+            boolean updateResponse = forgetPasswordRepo.updatePassword(usersModel);
+            if (updateResponse) {
+                return ApiResponse.builder().code(SUCCESS_CODE).message("New password saved").build();
+            } else {
+                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
+            }
+
+        } catch (Exception e) {
+            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE + e.getMessage()).build();
+        }
+    }
+
+
+//    public String otpExist(OtpModel otpModel) {
+//        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime currentDateTime = LocalDateTime.now();
+//        ;
+//        if (currentDateTime.plusMinutes(5).isBefore(now)) {
+//
+//            otpModel.setStatus("Expired");
+//            //  return "Expired";
+//        } else {
+//            otpModel.setStatus("Pending");
+//            //return "Pending";
+//        }
+//        forgetPasswordRepo.updateOtpBystatus(otpModel);
+//        return "Success";
+//    }
 
 //    public void sendMail(String email, Integer otpCode) {
 //        try {
@@ -138,7 +150,6 @@ public class ForgetPasswordService implements Constant {
 //            System.out.println("ERROR SEND MAILS : " + e);
 //        }
 //    }
-
 
 
 //    public Integer OTPNumber(Integer otpnumber) {

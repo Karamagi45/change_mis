@@ -3,6 +3,7 @@ package com.internship2025.changemanagementsystem.Controller;
 
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
 import com.internship2025.changemanagementsystem.Modal.OtpModel;
+import com.internship2025.changemanagementsystem.Modal.UsersModel;
 import com.internship2025.changemanagementsystem.Services.ForgetPasswordService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,12 @@ public class ForgetPasswordController {
     @PostMapping("validateOtpByEmail")
     public ApiResponse<?> validateOtpByEmail(@RequestBody  OtpModel otpModel){
         return  forgetPasswordService.validateOtpByEmail(otpModel);
+    }
+
+
+    @PostMapping("updatePassword")
+    public ApiResponse<?> updatePassword(@RequestBody UsersModel  usersModel){
+        return  forgetPasswordService.updatePassword(usersModel);
     }
 
 

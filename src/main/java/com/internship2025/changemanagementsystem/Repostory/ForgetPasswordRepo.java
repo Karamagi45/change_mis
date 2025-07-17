@@ -1,6 +1,7 @@
 package com.internship2025.changemanagementsystem.Repostory;
 
 import com.internship2025.changemanagementsystem.Modal.OtpModel;
+import com.internship2025.changemanagementsystem.Modal.UsersModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,13 @@ public class ForgetPasswordRepo {
         return jdbcTemplate.update(sql, "Expired", otpModel.getOtpCode(),otpModel.getEmail(), "pending") > 0;
 
     }
+
+
+    public boolean updatePassword(UsersModel  usersModel) {
+        String sql = "update users set password = ? where email = ?";
+        return  jdbcTemplate.update(sql,usersModel.getPassword(),usersModel.getEmail()) > 0;
+    }
+
 
 
     public List<OtpModel> findAllOtp() {
