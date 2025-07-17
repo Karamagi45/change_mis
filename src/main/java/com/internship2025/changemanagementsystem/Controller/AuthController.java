@@ -8,12 +8,12 @@ import com.internship2025.changemanagementsystem.Services.ForgetPasswordService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/forgottenPassword")
-public class ForgetPasswordController {
+@RequestMapping("/api/v1/auth/")
+public class AuthController {
 
     private final ForgetPasswordService forgetPasswordService;
 
-    public ForgetPasswordController(ForgetPasswordService forgetPasswordService) {
+    public AuthController(ForgetPasswordService forgetPasswordService) {
         this.forgetPasswordService = forgetPasswordService;
     }
 

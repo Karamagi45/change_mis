@@ -8,7 +8,7 @@ import com.internship2025.changemanagementsystem.Services.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users/")
+@RequestMapping("/api/v1/users/")
 public class UsersController {
 
     public  final UserService usersService;
