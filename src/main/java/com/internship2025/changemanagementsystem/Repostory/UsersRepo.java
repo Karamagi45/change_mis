@@ -42,6 +42,12 @@ public class UsersRepo {
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(UsersModel.class));
     }
 
+    public  List<?> searchUser(UsersModel user) {
+        String sql = "select * from users where  lower(full_name)   like (?) ";
+        String searchCard = "%"+user.getFullName()+"%";
+        return jdbcTemplate.query(sql,new  BeanPropertyRowMapper<>(UsersModel.class),searchCard);
+    }
+
     public UsersModel findUserByEmail(String email) {
         String sql = "select * from users where email = ?";
         List<UsersModel> resp = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UsersModel.class),
@@ -52,5 +58,6 @@ public class UsersRepo {
         else
             return null;
     }
+
 
 }

@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class Risk_assessment {
 
-    private String identified_risk;
-    private String risk_occurance;
+    private String identifiedRisk;
+    private String riskOccur;
+    private  String impactOccur;
 
 }

@@ -4,12 +4,13 @@ import lombok.Data;
 
 @Data
 public class Change_impact_evaluation {
-   private String change_type;
-   private String change_priority ;
-   private String change_impact ;
-   private String summary_result ;
-   private String conducted_by  ;
-   private Integer change_impact_id;
+   private String changeType;
+   private String changePriority ;
+   private String changeImpact ;
+   private String summaryResult ;
+   private String conductedBy  ;
+   private String impacted  ;
+   private Integer change_impactId;
 
 
 }

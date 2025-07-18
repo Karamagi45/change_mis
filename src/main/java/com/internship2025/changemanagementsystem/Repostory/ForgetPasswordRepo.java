@@ -5,9 +5,7 @@ import com.internship2025.changemanagementsystem.Modal.UsersModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.security.auth.spi.LoginModule;
 import java.util.List;
 
 @Repository
@@ -35,10 +33,9 @@ public class ForgetPasswordRepo {
 
     }
 
-    public boolean expiredOtpByStatus(OtpModel otpModel) {
+    public boolean updateOtpStatus(OtpModel otpModel) {
         String sql = "update otp set status = ? where  otp_code =? and  email=? and status= ?";
-
-        return jdbcTemplate.update(sql, "Expired", otpModel.getOtpCode(),otpModel.getEmail(), "pending") > 0;
+        return jdbcTemplate.update(sql, "Expired", otpModel.getOtpCode(),otpModel.getEmail(), "Pending") > 0;
 
     }
 
@@ -50,7 +47,8 @@ public class ForgetPasswordRepo {
 
 
 
-    public List<OtpModel> findAllOtp() {
+    public List<OtpModel> searchUser() {
+
         return null;
     }
 

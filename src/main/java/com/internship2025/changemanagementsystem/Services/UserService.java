@@ -73,21 +73,38 @@ public class UserService implements Constant {
 
             if(!usersModelList.isEmpty()){
                 System.out.println("users find successful");
-                return ApiResponse.builder().message(SUCCESS_MESSAGE)
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
                         .data(usersModelList).build();
             }else {
                 System.out.println("users find failed");
-                return ApiResponse.builder().message(NO_DATA_FOUND_MESSAGE).build();
+                return ApiResponse.builder().code(NO_DATA_FOUND_CODE).message(NO_DATA_FOUND_MESSAGE).build();
             }
 
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return  ApiResponse.builder().message(EXCEPTION_MESSAGE).build();
+            return  ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
 
+    public ApiResponse<?> searchUsers(UsersModel usersModel){
+        try {
 
+            List<?> searchResponse = usersRepo.searchUser(usersModel);
+            if(!searchResponse.isEmpty()){
+                System.out.println("users search successful");
+               return ApiResponse.builder().code(SUCCESS_CODE)
+                            .message(SUCCESS_MESSAGE)
+                            .data(searchResponse).build();
+            }else {
+                System.out.println("searchUsers failed");
+                return ApiResponse.builder().code(NO_DATA_FOUND_CODE).message(NO_DATA_FOUND_MESSAGE).build();
+            }
 
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return  ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
+        }
+    }
 
 
 }

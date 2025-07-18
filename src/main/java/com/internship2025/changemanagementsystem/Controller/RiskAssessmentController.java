@@ -7,7 +7,7 @@ import com.internship2025.changemanagementsystem.Services.RiskAssessmentService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/risks")
+@RequestMapping("/api/v1/risks")
 public class RiskAssessmentController {
 
     private final RiskAssessmentService riskAssessmentService ;

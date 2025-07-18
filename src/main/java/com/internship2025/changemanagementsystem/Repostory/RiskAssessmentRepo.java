@@ -18,12 +18,12 @@ public class RiskAssessmentRepo {
 
     public boolean saveRisks(Risk_assessment assessments) {
 
-        String sql = "insert into  risk_assessment( identified_risk, risk_occurance) values (?,?)";
+        String sql = "insert into  risk_assessment( identified_risk, risk_occurance,impact_occur) values (?,?,?)";
 
-        return jdbcTemplate.update(sql, assessments.getIdentified_risk(), assessments.getRisk_occurance()) > 0;
+        return jdbcTemplate.update(sql, assessments.getIdentifiedRisk(), assessments.getRiskOccur(),
+                assessments.getImpactOccur()) > 0;
 
     }
-
 
     public List<Risk_assessment> findAll() {
         String sql = "select * from risk_assessment";

@@ -7,11 +7,6 @@ import com.internship2025.changemanagementsystem.Modal.OtpModel;
 import com.internship2025.changemanagementsystem.Modal.UsersModel;
 import com.internship2025.changemanagementsystem.Repostory.ForgetPasswordRepo;
 import com.internship2025.changemanagementsystem.Repostory.UsersRepo;
-import jakarta.mail.Message;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -37,24 +32,23 @@ public class ForgetPasswordService implements Constant {
             List<OtpModel> otpResponse = forgetPasswordRepo
                     .selectOtpByEmail(otpModel.getOtpCode(), otpModel.getEmail());
             if (otpResponse == null || otpResponse.isEmpty()) {
-                return ApiResponse.builder().code(FAILED_CODE)
-                        .message("otp is not valid").build();
+                return ApiResponse.builder().code(FAILED_CODE).message("OTP is not valid").build();
+            }
+            OtpModel foundOtp = otpResponse.get(0);
+            if ("Expired".equalsIgnoreCase(foundOtp.getStatus())) {
+                return ApiResponse.builder().code(FAILED_CODE).message("OTP is expired").build();
+            }
+            boolean statusUpdated = forgetPasswordRepo.updateOtpStatus(otpModel);
+            if (!statusUpdated) {
+                return ApiResponse.builder().code(FAILED_CODE).message("Failed to update OTP status").build();
             } else {
-                if (otpResponse.get(0).getStatus().equals("Expired")) {
-                    return ApiResponse.builder().code(FAILED_CODE).message("otp is expired").build();
-                } else {
-                    boolean expired = forgetPasswordRepo.expiredOtpByStatus(otpModel);
-                    if (expired) {
-                        return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
-                    } else
-                        return ApiResponse.builder().code(FAILED_CODE).message("Failed to update OTP Status").build();
-                }
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE + e.getMessage()).build();
+            log.error("OTP validation failed", e);
+            return ApiResponse.builder()
+                    .code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE + ": " + e.getMessage()).build();
         }
-
     }
 
     public ApiResponse<?> forgetPassword(String email) {

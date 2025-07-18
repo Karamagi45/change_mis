@@ -39,6 +39,11 @@ public class UsersController {
         return usersService.validateLogin(user);
     }
 
+    @PostMapping("searchUser")
+    public ApiResponse<?> searchUser(@RequestBody UsersModel user) {
+        return usersService.searchUsers(user);
+    }
+
 
 
 }
