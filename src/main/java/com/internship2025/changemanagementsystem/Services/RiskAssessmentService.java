@@ -23,12 +23,13 @@ public class RiskAssessmentService implements Constant {
         try {
             boolean results = riskAssessmentRepo.saveRisks(assessments);
             if (results) {
+                log.info("RiskAssessment save successful");
                 return  ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
             }else  {
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
             }
         }catch (Exception e){
-
+            log.info(e.getMessage());
             return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
 
