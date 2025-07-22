@@ -1,7 +1,7 @@
 package com.internship2025.changemanagementsystem.Controller;
 
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
-import com.internship2025.changemanagementsystem.Modal.Change_detail;
+import com.internship2025.changemanagementsystem.Modal.ChangeDetail;
 import com.internship2025.changemanagementsystem.Services.ChangeDetailService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +15,19 @@ public class ChangeDetailController {
         this.changeDetailService = changeDetailService;
     }
 
+
+    @PostMapping("updateChangeDetail")
+    public ApiResponse<?> updateChangeDetail(@RequestBody  ChangeDetail change_detail) {
+        return changeDetailService.updateChangeDetail(change_detail);
+    }
+
     @GetMapping("findChangeDetails")
-    public ApiResponse<?> findChangeDetails(){
+    public ApiResponse<?> findChangeDetails() {
         return changeDetailService.findChangeDetails();
     }
 
     @PostMapping("newChangeDetail")
-    public ApiResponse<?> newChangeDetail(@RequestBody Change_detail  change_detail) {
+    public ApiResponse<?> newChangeDetail(@RequestBody ChangeDetail change_detail) {
         return changeDetailService.newChangeDetail(change_detail);
     }
 

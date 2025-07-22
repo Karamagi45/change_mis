@@ -2,24 +2,23 @@ package com.internship2025.changemanagementsystem.Services;
 
 import com.internship2025.changemanagementsystem.Interfaces.Constant;
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
-import com.internship2025.changemanagementsystem.Modal.Change_impact_evaluation;
-import com.internship2025.changemanagementsystem.Repostory.ChangeDetailRepo;
-import com.internship2025.changemanagementsystem.Repostory.ChangeEvaluationRepo;
+import com.internship2025.changemanagementsystem.Modal.ChangeImpactEvaluation;
+import com.internship2025.changemanagementsystem.Repostory.ChangeImpactEvaluationRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ChangeEvaluationService  implements Constant {
+public class ChangeImpactEvaluationService implements Constant {
 
-    private  final ChangeEvaluationRepo  evaluationRepo;
+    private  final ChangeImpactEvaluationRepo evaluationRepo;
 
-    public ChangeEvaluationService(ChangeEvaluationRepo evaluationRepo) {
+    public ChangeImpactEvaluationService(ChangeImpactEvaluationRepo evaluationRepo) {
         this.evaluationRepo = evaluationRepo;
 
     }
 
-    public ApiResponse<?> addChangeEvaluation(Change_impact_evaluation  evaluation){
+    public ApiResponse<?> addChangeEvaluation(ChangeImpactEvaluation evaluation){
         try {
             boolean evaluateResponse = evaluationRepo.createChangeEvaluation(evaluation);
             if(evaluateResponse){

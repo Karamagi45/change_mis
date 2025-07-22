@@ -3,7 +3,7 @@ package com.internship2025.changemanagementsystem.Modal;
 import lombok.Data;
 
 @Data
-public class Change_impact_evaluation {
+public class ChangeImpactEvaluation {
    private String changeType;
    private String changePriority ;
    private String changeImpact ;

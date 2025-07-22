@@ -1,14 +1,18 @@
 package com.internship2025.changemanagementsystem.Modal;
 
+import lombok.Data;
+import org.springframework.context.annotation.Bean;
+
+@Data
 public class Change_approval_rejection {
 
-   private boolean change_request_status ;
+   private String changeRequestStatus ;
    private String comments;
-   private String change_control_committee;
-   private String lead_software_engineer ;
-   private String project_manager;
-   private String lead_infrastructure_database ;
-   private String head_consult_support_department ;
-   private Integer change_proof_id;
+   private String changeControlCommittee;
+   private String leadSoftwareEngineer ;
+   private String projectManager;
+   private String leadInfrastructureDatabase ;
+   private String headConsultSupportDepartment ;
+   private Integer changeProofId;
 
 }

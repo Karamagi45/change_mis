@@ -2,7 +2,7 @@ package com.internship2025.changemanagementsystem.Controller;
 
 
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
-import com.internship2025.changemanagementsystem.Modal.Risk_assessment;
+import com.internship2025.changemanagementsystem.Modal.RiskAssessment;
 import com.internship2025.changemanagementsystem.Services.RiskAssessmentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +22,11 @@ public class RiskAssessmentController {
     }
 
     @PostMapping("saveRisks")
-    public ApiResponse<?> saveRisks(@RequestBody Risk_assessment assessments){
+    public ApiResponse<?> saveRisks(@RequestBody RiskAssessment assessments){
 
         return  riskAssessmentService.saveRisks(assessments);
     }
+
+
 
 }

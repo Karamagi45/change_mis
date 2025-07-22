@@ -34,6 +34,7 @@ public class ForgetPasswordService implements Constant {
             if (otpResponse == null || otpResponse.isEmpty()) {
                 return ApiResponse.builder().code(FAILED_CODE).message("OTP is not valid").build();
             }
+
             OtpModel foundOtp = otpResponse.get(0);
             if ("Expired".equalsIgnoreCase(foundOtp.getStatus())) {
                 return ApiResponse.builder().code(FAILED_CODE).message("OTP is expired").build();
@@ -159,15 +160,12 @@ public class ForgetPasswordService implements Constant {
         try {
             boolean results = forgetPasswordRepo.saveOtp(otpModel);
             if (results) {
-                //  System.out.println("Am clear!!");
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
             } else {
-                //System.out.println("Am not fine!!");
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
             }
 
         } catch (Exception e) {
-            //System.out.println("something is wrong!!" + e.getMessage());
             return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
