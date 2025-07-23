@@ -30,6 +30,7 @@ public class ChangeDetailService implements Constant {
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
@@ -60,8 +61,10 @@ public class ChangeDetailService implements Constant {
                         .data(findResponse).build();
 
             } else
+                System.out.println("Data not fetched");
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
