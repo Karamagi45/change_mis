@@ -9,7 +9,7 @@ import java.util.List;
 public class ChangeDetail {
    private Integer changeRequestId;
    private String sourceOfChange ;
-   private List typeOfChange ;
+   private List<String> typeOfChange ;
    private String requestBy ;
    private String clientName ;
    private String costImplementation  ;
