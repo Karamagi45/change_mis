@@ -17,10 +17,9 @@ public class DisplayChangeImpactRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<DisplayChangeImpact> getAllType() {
+    public List<String> getAllType() {
         String sql = "select display from change_impact_display";
-        return  jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<>(DisplayChangeImpact.class));
+        return  jdbcTemplate.queryForList(sql, String.class);
     }
 
 

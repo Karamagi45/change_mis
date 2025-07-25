@@ -47,9 +47,5 @@ public class ForgetPasswordRepo {
 
 
 
-    public List<OtpModel> searchUser() {
-
-        return null;
-    }
 
 }

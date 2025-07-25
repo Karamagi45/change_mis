@@ -21,7 +21,7 @@ public class DisplayChangeImpactService implements Constant {
 
     public ApiResponse<?> getDisplayChangeImpact() {
         try {
-            List<DisplayChangeImpact> response = displayChangeImpactRepo.getAllType();
+            List<String> response = displayChangeImpactRepo.getAllType();
             if (response == null) {
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
             }else

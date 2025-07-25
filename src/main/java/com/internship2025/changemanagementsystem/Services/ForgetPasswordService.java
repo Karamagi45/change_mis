@@ -43,7 +43,8 @@ public class ForgetPasswordService implements Constant {
             if (!statusUpdated) {
                 return ApiResponse.builder().code(FAILED_CODE).message("Failed to update OTP status").build();
             } else {
-                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
+                        .build();
             }
         } catch (Exception e) {
             log.error("OTP validation failed", e);

@@ -22,7 +22,7 @@ public class DisplayChangeOfTypeService implements Constant {
 
     public ApiResponse<?> getTypeOfChange() {
         try {
-            List<TypeOfChange> typeOfChange = displayChangeOfTypeRepo.getAllChange();
+            List<String> typeOfChange = displayChangeOfTypeRepo.getAllChange();
             if(typeOfChange != null   || typeOfChange.size()>0){
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
                         .data(typeOfChange).build();

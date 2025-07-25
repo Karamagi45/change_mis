@@ -17,9 +17,9 @@ public class DisplayChangeOfTypeRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<TypeOfChange> getAllChange() {
+    public List<String> getAllChange() {
         String sql = "select description from type_of_change_display";
-        return  jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(TypeOfChange.class));
+        return  jdbcTemplate.queryForList(sql, String.class);
     }
 
 }

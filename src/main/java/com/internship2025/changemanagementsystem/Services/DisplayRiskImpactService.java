@@ -21,7 +21,7 @@ public class DisplayRiskImpactService implements Constant {
 
     public ApiResponse<?> getDisplayRiskImpact(){
         try {
-            List<DisplayRiskImpact>  displayRiskImpacts = displayRiskImpactRepo.findAll();
+            List<String>  displayRiskImpacts = displayRiskImpactRepo.findAll();
             if(!displayRiskImpacts.isEmpty()){
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
                         .data(displayRiskImpacts).build();

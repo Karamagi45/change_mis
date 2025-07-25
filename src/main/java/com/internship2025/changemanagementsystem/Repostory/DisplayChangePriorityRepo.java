@@ -17,9 +17,8 @@ public class DisplayChangePriorityRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<DisplayChangePriority> getAllType() {
+    public List<String> getAllType() {
         String sql = "select display from change_priority_display";
-        return  jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<>(DisplayChangePriority.class));
+        return  jdbcTemplate.queryForList(sql, String.class);
     }
 }

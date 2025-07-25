@@ -23,7 +23,7 @@ public class DisplayRiskLikelihoodService implements Constant {
 
     public ApiResponse<?> getDisplayRiskLikelihood() {
         try {
-            List<DisplayRiskLikelihood> response = displayRiskLikelihoodRepo.findAllRiskLikelihood();
+            List<String> response = displayRiskLikelihoodRepo.findAllRiskLikelihood();
             if (response == null) {
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
             } else

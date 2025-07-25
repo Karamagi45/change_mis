@@ -18,10 +18,9 @@ public class DisplayChangeTypeRepo {
     }
 
 
-    public List<DisplayChangeType> getAllType() {
+    public List<String> getAllType() {
         String sql = "select display from change_type_display";
-        return jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<>(DisplayChangeType.class));
+        return jdbcTemplate.queryForList(sql, String.class);
     }
 
 

@@ -22,7 +22,7 @@ public class DisplayChangePriorityService implements Constant {
 
     public ApiResponse<?> getDisplayChangePriority() {
         try {
-            List<DisplayChangePriority> response = displayChangePriorityRepo.getAllType();
+            List<String> response = displayChangePriorityRepo.getAllType();
             if (response == null) {
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
             } else

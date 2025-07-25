@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class TypeOfChange {
 
-    private String description ;
+private String description;
+
+
 }

@@ -17,10 +17,9 @@ public class DisplayRiskLikelihoodRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<DisplayRiskLikelihood> findAllRiskLikelihood() {
+    public List<String> findAllRiskLikelihood() {
         String query = "select display from risk_likelihood_display";
 
-        return jdbcTemplate.query(query,
-                new BeanPropertyRowMapper<>(DisplayRiskLikelihood.class));
+        return jdbcTemplate.queryForList(query, String.class);
     }
 }

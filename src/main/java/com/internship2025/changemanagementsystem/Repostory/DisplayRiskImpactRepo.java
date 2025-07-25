@@ -16,10 +16,9 @@ public class DisplayRiskImpactRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<DisplayRiskImpact> findAll(){
+    public List<String> findAll(){
         String sql = "select display from risk_impact_display";
-        return  jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<>(DisplayRiskImpact.class));
+        return  jdbcTemplate.queryForList(sql, String.class);
     }
 
 }

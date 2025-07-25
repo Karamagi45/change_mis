@@ -22,7 +22,7 @@ public class DisplayChangeTypeService implements Constant {
 
     public ApiResponse<?> getDisplayChangeType() {
         try {
-            List<DisplayChangeType> response = displayChangeTypeRepo.getAllType();
+            List<String> response = displayChangeTypeRepo.getAllType();
             if (response != null) {
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
                         .data(response).build();
