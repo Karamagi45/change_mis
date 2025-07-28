@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class UsersRepo {
 
-    private final JdbcTemplate  jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public UsersRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -21,31 +21,31 @@ public class UsersRepo {
 
         String sql = "insert into  users(full_name, email, password, confirm_password, role,phone) values (?,?,?,?,?,?)";
 
-       return jdbcTemplate.update(sql, user.getFullName(), user.getEmail(), user.getPassword(),
-                user.getConfirmPassword(), user.getRole(),user.getPhone())  > 0;
+        return jdbcTemplate.update(sql, user.getFullName(), user.getEmail(), user.getPassword(),
+                user.getConfirmPassword(), user.getRole(), user.getPhone()) > 0;
 
     }
 
 
-    public List<LoginUser> login (String email,String password) {
+    public List<LoginUser> login(String email, String password) {
         String sql = "select * from users  where email = ? and password = ?";
-       List<LoginUser> cred = jdbcTemplate.query(sql,
-                new  BeanPropertyRowMapper<>(LoginUser.class),email,password);
-       if(!cred.isEmpty()){
-           return cred;
-       }else
-           return null;
+        List<LoginUser> cred = jdbcTemplate.query(sql,
+                new BeanPropertyRowMapper<>(LoginUser.class), email, password);
+        if (!cred.isEmpty()) {
+            return cred;
+        } else
+            return null;
     }
 
     public List<UsersModel> findAllUsers() {
-        String  sql = "select * from users";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(UsersModel.class));
+        String sql = "select * from users";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UsersModel.class));
     }
 
-    public  List<?> searchUser(UsersModel user) {
+    public List<?> searchUser(UsersModel user) {
         String sql = "select * from users where  lower(full_name)   like (?) ";
-        String searchCard = "%"+user.getFullName()+"%";
-        return jdbcTemplate.query(sql,new  BeanPropertyRowMapper<>(UsersModel.class),searchCard);
+        String searchCard = "%" + user.getFullName() + "%";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UsersModel.class), searchCard);
     }
 
     public UsersModel findUserByEmail(String email) {
@@ -53,7 +53,7 @@ public class UsersRepo {
         List<UsersModel> resp = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UsersModel.class),
                 email);
 
-        if(!resp.isEmpty())
+        if (!resp.isEmpty())
             return resp.get(0);
         else
             return null;

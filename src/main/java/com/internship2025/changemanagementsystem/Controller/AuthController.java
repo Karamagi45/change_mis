@@ -22,12 +22,15 @@ public class AuthController {
         return  forgetPasswordService.validateOtpByEmail(otpModel);
     }
 
-
     @PostMapping("updatePassword")
     public ApiResponse<?> updatePassword(@RequestBody UsersModel  usersModel){
         return  forgetPasswordService.updatePassword(usersModel);
     }
 
+    @PutMapping("updateFullName")
+    public ApiResponse<?> updateFullName(@RequestBody UsersModel usersModel) {
+        return  forgetPasswordService.updateFullName(usersModel);
+    }
 
     @PostMapping("saveOtpRecord")
     public ApiResponse<?> saveOtpRecord(@RequestBody  OtpModel otpModel) {
@@ -38,11 +41,11 @@ public class AuthController {
     public ApiResponse<?> forgetPassword(@RequestBody OtpModel otpModel){
         return  forgetPasswordService.forgetPassword(otpModel.getEmail());
     }
-
-    @GetMapping("generateOTP")
-    public Object generateOTP(){
-        return forgetPasswordService.generateOTP() ;
-    }
+//
+//    @GetMapping("generateOTP")
+//    public Object generateOTP(){
+//        return forgetPasswordService.generateOTP() ;
+//    }
 
 //    @GetMapping("dateUsers")
 //    public String dateUsers(){

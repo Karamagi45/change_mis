@@ -45,6 +45,10 @@ public class ForgetPasswordRepo {
         return  jdbcTemplate.update(sql,usersModel.getPassword(),usersModel.getEmail()) > 0;
     }
 
+    public  boolean updateFullName(UsersModel  usersModel){
+        String sql = "update users set full_name = ? where email = ?";
+        return  jdbcTemplate.update(sql,usersModel.getFullName(),usersModel.getEmail()) > 0;
+    }
 
 
 

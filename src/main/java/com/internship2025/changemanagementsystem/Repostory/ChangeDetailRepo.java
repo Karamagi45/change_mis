@@ -48,6 +48,7 @@ public class ChangeDetailRepo {
         String sql = "SELECT source_of_change, request_by, client_name, " +
                 "cost_implementation, change_description_objection," +
                 " type_of_change, change_request_id FROM change_detail";
+
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             ChangeDetail dto = new ChangeDetail();
             dto.setSourceOfChange(rs.getString("source_of_change"));
