@@ -4,10 +4,12 @@ import com.internship2025.changemanagementsystem.Interfaces.Constant;
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
 import com.internship2025.changemanagementsystem.Modal.ChangeImpactEvaluation;
 import com.internship2025.changemanagementsystem.Repostory.ChangeImpactEvaluationRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class ChangeImpactEvaluationService implements Constant {
 
@@ -17,6 +19,7 @@ public class ChangeImpactEvaluationService implements Constant {
         this.evaluationRepo = evaluationRepo;
 
     }
+
 
     public ApiResponse<?> addChangeEvaluation(ChangeImpactEvaluation evaluation){
         try {
@@ -30,6 +33,22 @@ public class ChangeImpactEvaluationService implements Constant {
             return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
+
+    public ApiResponse<?> showLastKeyNumber(){
+        try {
+            int lastKeyNumber = evaluationRepo.showLastKeyNumber();
+            if(lastKeyNumber>0){
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
+                        .data(lastKeyNumber).build();
+            }else {
+                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
+        }
+    }
+
 
     public ApiResponse<?> fetchChangeEvaluation(){
         try {

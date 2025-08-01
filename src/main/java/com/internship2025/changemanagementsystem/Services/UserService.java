@@ -38,6 +38,25 @@ public class UserService implements Constant {
         }
     }
 
+    public ApiResponse<?>  updateUsers(UsersModel user) {
+        try {
+            boolean results = usersRepo.updateUser(user);
+            if (results) {
+
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
+            } else {
+                System.out.println("users update failed");
+                return ApiResponse.builder().message(FAILED_MESSAGE).build();
+            }
+        } catch (Exception e) {
+
+            log.error(e.getMessage(), e);
+            return ApiResponse.builder().message(EXCEPTION_MESSAGE).build();
+        }
+    }
+
+
+
     public ApiResponse<?> login(LoginUser  loginUser) {
 
         List<LoginUser> response = usersRepo.login(loginUser.getEmail(), loginUser.getPassword());
@@ -71,7 +90,7 @@ public class UserService implements Constant {
 
             List<UsersModel> usersModelList = usersRepo.findAllUsers();
 
-            if(!usersModelList.isEmpty()){
+            if(usersModelList !=  null && !usersModelList.isEmpty()){
                 System.out.println("users find successful");
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
                         .data(usersModelList).build();
@@ -90,7 +109,7 @@ public class UserService implements Constant {
         try {
 
             List<?> searchResponse = usersRepo.searchUser(usersModel);
-            if(!searchResponse.isEmpty()){
+            if(searchResponse !=  null && !searchResponse.isEmpty()){
                 System.out.println("users search successful");
                return ApiResponse.builder().code(SUCCESS_CODE)
                             .message(SUCCESS_MESSAGE)

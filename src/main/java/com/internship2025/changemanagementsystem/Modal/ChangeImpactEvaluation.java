@@ -13,6 +13,7 @@ public class ChangeImpactEvaluation {
    private String conductedBy  ;
    private String impacted  ;
    private Integer impactedChangeId;
+   private Integer changeRequestId;
 
 
 }

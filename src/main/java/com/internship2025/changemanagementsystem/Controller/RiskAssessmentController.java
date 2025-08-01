@@ -27,6 +27,11 @@ public class RiskAssessmentController {
         return  riskAssessmentService.saveRisks(assessments);
     }
 
+    @GetMapping("showLastKeyNumber")
+    public ApiResponse<?> showLastKeyNumber(){
+        return  riskAssessmentService.showLastKeyNumber();
+    }
+
 
 
 }

@@ -24,9 +24,18 @@ public class ChangeImpactEvaluationRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    public int showLastKeyNumber(){
+        String sql = "select change_request_id from change_detail\n" +
+                "order by  change_request_id DESC\n" +
+                "LIMIT 1";
+        return  jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
     public boolean createChangeEvaluation(ChangeImpactEvaluation evaluation) {
         String changeSql = "insert into change_impact_evaluation( change_priority, " +
-                "change_impact, summary_result, conducted_by, impacted,change_type) values (?,?,?,?,?,?)";
+                "change_impact, summary_result, conducted_by, impacted,change_type,change_request_id) " +
+                "values (?,?,?,?,?,?,?)";
 
         return jdbcTemplate.execute((Connection conn) -> {
             try (PreparedStatement ps = conn.prepareStatement(changeSql)) {
@@ -35,11 +44,18 @@ public class ChangeImpactEvaluationRepo {
                 ps.setString(3, evaluation.getSummaryResult());
                 ps.setString(4, evaluation.getConductedBy());
                 ps.setString(5, evaluation.getImpacted());
+                ps.setInt(7,showLastKeyNumber());
+
 
                 Array typeArray = conn.createArrayOf("text", evaluation.getChangeType().toArray());
                 ps.setArray(6, typeArray);
 
-                return ps.executeUpdate() > 0;
+                if (ps != null) {
+                    System.out.println("A field is created");
+                    return ps.executeUpdate() > 0;
+                }else
+                    System.out.println("A field is null or empty");
+                    return false;
             }
         });
 
@@ -48,7 +64,7 @@ public class ChangeImpactEvaluationRepo {
 
     public List<?> getAllChangeEvaluation() {
         String sql = "select change_priority, change_impact, summary_result, " +
-                "conducted_by, impacted,impacted_change_id,change_type from change_impact_evaluation";
+                "conducted_by, impacted,impacted_change_id,change_type,change_request_id from change_impact_evaluation";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             ChangeImpactEvaluation dto = new ChangeImpactEvaluation();
 
@@ -58,6 +74,7 @@ public class ChangeImpactEvaluationRepo {
             dto.setConductedBy(rs.getString("conducted_by"));
             dto.setImpacted(rs.getString("impacted"));
             dto.setImpactedChangeId(rs.getInt("impacted_change_id"));
+            dto.setChangeRequestId(rs.getInt(showLastKeyNumber()));
 
 
             Array array = rs.getArray("change_type");

@@ -19,11 +19,27 @@ public class UsersRepo {
 
     public boolean save(UsersModel user) {
 
-        String sql = "insert into  users(full_name, email, password, confirm_password, role,phone) values (?,?,?,?,?,?)";
+        String sql = """
+                 insert into  
+                 users(full_name, 
+                 email, password, 
+                phone, roles_id) values (?,?,?,?,?)""";
 
         return jdbcTemplate.update(sql, user.getFullName(), user.getEmail(), user.getPassword(),
-                user.getConfirmPassword(), user.getRole(), user.getPhone()) > 0;
+                user.getPhone(), user.getRolesId()) > 0;
 
+    }
+
+
+    public boolean updateUser(UsersModel user) {
+        String sql = """
+                Update users set full_name = ?,
+                 email = ?, password = ? , phone = ?, 
+                 roles_id = ? where users_id = ?
+                """;
+        return jdbcTemplate.update(sql, user.getFullName(),
+                user.getEmail(), user.getPassword(),
+                user.getPhone(), user.getRolesId(), user.getRolesId()) > 0;
     }
 
 
@@ -38,7 +54,13 @@ public class UsersRepo {
     }
 
     public List<UsersModel> findAllUsers() {
-        String sql = "select * from users";
+        String sql = """
+                select uu.full_name,uu.email,uu.phone,uu.users_id,
+                       rt.role_name,uu.roles_id
+                from users uu
+                         join roles rt
+                              on uu.roles_id = rt.roles_id;
+                """;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UsersModel.class));
     }
 

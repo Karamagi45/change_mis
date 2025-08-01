@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 public class RiskAssessment {
 
-    private String riskAssessmentId;
+    private Integer riskAssessmentId;
     private String riskType;
     private String riskLikelihood;
     private  String riskImpact;
+    private  Integer changeRequestId;
 
 }

@@ -17,11 +17,37 @@ public class ChangeImplementationRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public boolean createChangeImpl(ChangeImplementation implementation) {
-        String sql = "insert into change_implementation(change_implemented, date_time_implementation, comments, implemented_by, signature) values (?,?,?,?,?)";
 
-        return jdbcTemplate.update(sql, implementation.getChangeImplemented(), implementation.getDateTimeImplementation(), implementation.getComments()
-                , implementation.getImplementedBy(), implementation.getSignature()) > 0;
+    public int showLastKeyNumber() {
+        String sql = """
+                select 
+                     change_request_id
+                from change_detail
+                                order by  change_request_id DESC 
+                                LIMIT 1""";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    public boolean createChangeImpl(ChangeImplementation implementation) {
+        String sql = """
+                insert into 
+                         change_implementation(
+                         change_implemented, 
+                date_time_implementation,
+                comments, 
+                implemented_by, 
+                signature,
+                change_request_id )
+                         values (?,?,?,?,?,?)""";
+
+        return jdbcTemplate.update(sql,
+                implementation.getChangeImplemented(),
+                implementation.getDateTimeImplementation(),
+                implementation.getComments(),
+                implementation.getImplementedBy(),
+                implementation.getSignature(),
+                showLastKeyNumber()
+        ) > 0;
     }
 
     public boolean updateChangeImpl(ChangeImplementation implementation) {

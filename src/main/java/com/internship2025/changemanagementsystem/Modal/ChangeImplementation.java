@@ -13,5 +13,6 @@ public class ChangeImplementation {
    private String changeImplemented;
    private String  comments ;
    private String  implementedBy;
+   private Integer changeRequestId ;
 
 }

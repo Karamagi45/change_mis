@@ -33,6 +33,11 @@ public class UsersController {
       return   usersService.saveUsers(user);
     }
 
+    @PutMapping("updateUsers")
+    public ApiResponse<?>  updateUsers(@RequestBody  UsersModel user) {
+        return usersService.updateUsers(user);
+    }
+
     @PostMapping("validateLogin")
     public ApiResponse<?> validateLogin(@RequestBody UsersModel user) {
 

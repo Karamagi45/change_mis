@@ -28,11 +28,30 @@ public class ChangeImplementationService implements Constant {
             if (changeResponse) {
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
             } else
+
                 return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
         } catch (Exception e) {
+
             return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
         }
     }
+
+
+    public ApiResponse<?> showLastKeyNumber(){
+        try {
+            int lastKeyNumber = changeImplementationRepo.showLastKeyNumber();
+            if(lastKeyNumber>0){
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
+                        .data(lastKeyNumber).build();
+            }else {
+                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
+            }
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
+        }
+    }
+
 
     public ApiResponse<?> updateChangeImpl(ChangeImplementation changeImpl) {
         try {

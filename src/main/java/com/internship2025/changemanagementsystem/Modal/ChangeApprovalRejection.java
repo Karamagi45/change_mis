@@ -1,11 +1,12 @@
 package com.internship2025.changemanagementsystem.Modal;
 
 import lombok.Data;
-import org.springframework.context.annotation.Bean;
 
 @Data
-public class Change_approval_rejection {
+public class ChangeApprovalRejection {
 
+   private Integer changeProofId;
+   private Integer changeRequestId;
    private String changeRequestStatus ;
    private String comments;
    private String changeControlCommittee;
@@ -13,6 +14,6 @@ public class Change_approval_rejection {
    private String projectManager;
    private String leadInfrastructureDatabase ;
    private String headConsultSupportDepartment ;
-   private Integer changeProofId;
+
 
 }

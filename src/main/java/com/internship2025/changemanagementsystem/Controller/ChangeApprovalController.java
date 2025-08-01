@@ -1,7 +1,7 @@
 package com.internship2025.changemanagementsystem.Controller;
 
 import com.internship2025.changemanagementsystem.Modal.ApiResponse;
-import com.internship2025.changemanagementsystem.Modal.Change_approval_rejection;
+import com.internship2025.changemanagementsystem.Modal.ChangeApprovalRejection;
 import com.internship2025.changemanagementsystem.Services.ChangeApprovalService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +17,14 @@ public class ChangeApprovalController {
 
 
     @PostMapping("addChangeApproval")
-    public ApiResponse<?> addChangeApproval(@RequestBody Change_approval_rejection rejection){
+    public ApiResponse<?> addChangeApproval(@RequestBody ChangeApprovalRejection rejection){
         return changeApprovalService.addChangeApproval(rejection);
+    }
+
+
+    @GetMapping("showLastKeyNumber")
+    public ApiResponse<?> showLastKeyNumber(){
+        return changeApprovalService.showLastKeyNumber();
     }
 
 

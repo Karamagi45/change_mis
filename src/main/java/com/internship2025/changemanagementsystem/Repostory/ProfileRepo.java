@@ -19,25 +19,25 @@ public class ProfileRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<ProfileModal > profileByEmail(String email, String password) {
+    public List<ProfileModal> profileByEmail(String email, String password) {
         String query = "select * from users where email = ? and password = ?";
-        List<ProfileModal > cred = jdbcTemplate.query(query,
-                new BeanPropertyRowMapper<>(ProfileModal.class),email,password);
-        if(!cred.isEmpty()){
+        List<ProfileModal> cred = jdbcTemplate.query(query,
+                new BeanPropertyRowMapper<>(ProfileModal.class), email, password);
+        if (!cred.isEmpty()) {
             return cred;
-        }else
+        } else
             return null;
     }
 
 
-    public List<ProfileModal > fetchProfileByEmail(String email) {
+    public List<ProfileModal> fetchProfileByEmail(String email) {
         String query = "select full_name, role ,email, password from users where email = ?";
 
-        List<ProfileModal > cred =jdbcTemplate.query(query,
+        List<ProfileModal> cred = jdbcTemplate.query(query,
                 new BeanPropertyRowMapper<>(ProfileModal.class), email);
-        if(!cred.isEmpty()){
+        if (!cred.isEmpty()) {
             return cred;
-        }else
+        } else
             return null;
     }
 
@@ -48,10 +48,10 @@ public class ProfileRepo {
                 new BeanPropertyRowMapper<>(ChangePassword.class), password);
     }
 
-  public boolean changePassword(String newPassword, String oldPassword) {
+    public boolean changePassword(String newPassword, String oldPassword) {
         String query = "update users set password = ? where password = ?";
-       return jdbcTemplate.update(query,newPassword,oldPassword) > 0;
-   }
+        return jdbcTemplate.update(query, newPassword, oldPassword) > 0;
+    }
 
 
 }

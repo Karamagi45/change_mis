@@ -23,7 +23,7 @@ public class ProfileController {
     }
 
     @PutMapping("changePassword")
-    public ApiResponse<?> changePassword(@RequestBody ChangePassword  changePassword) {
+    public ApiResponse<?> changePassword(@RequestBody ChangePassword changePassword) {
 
         return profileService.changePassword(changePassword);
     }

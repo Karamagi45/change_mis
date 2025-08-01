@@ -21,6 +21,13 @@ public class ChangeImplementationController {
         return changeImplementationService.addChangeImpl(implementation);
     }
 
+
+    @GetMapping("showLastKeyNumber()")
+    public ApiResponse<?> showLastKeyNumber(){
+        return changeImplementationService.showLastKeyNumber();
+    }
+
+
     @PostMapping("updateChangeImpl")
     public ApiResponse<?> updateChangeImpl(@RequestBody ChangeImplementation implementation) {
         return changeImplementationService.updateChangeImpl(implementation);
