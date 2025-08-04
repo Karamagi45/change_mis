@@ -35,24 +35,23 @@ public class ChangeImplementationRepo {
                          change_implemented, 
                 date_time_implementation,
                 comments, 
-                implemented_by, 
-                signature,
+                implemented_by,
                 change_request_id )
-                         values (?,?,?,?,?,?)""";
+                         values (?,?,?,?,?)""";
 
         return jdbcTemplate.update(sql,
                 implementation.getChangeImplemented(),
                 implementation.getDateTimeImplementation(),
                 implementation.getComments(),
                 implementation.getImplementedBy(),
-                implementation.getSignature(),
+
                 showLastKeyNumber()
         ) > 0;
     }
 
     public boolean updateChangeImpl(ChangeImplementation implementation) {
         String sql = "UPDATE change_implementation SET change_implemented = ?, date_time_implementation = ?, comments = ?," +
-                " implemented_by = ?, signature = ? WHERE change_implementation_id = ?";
+                " implemented_by = ? WHERE change_implementation_id = ?";
 
         return jdbcTemplate.update(
                 sql,
@@ -60,7 +59,6 @@ public class ChangeImplementationRepo {
                 implementation.getDateTimeImplementation(),
                 implementation.getComments(),
                 implementation.getImplementedBy(),
-                implementation.getSignature(),
                 implementation.getChangeImplementationId()) > 0;
     }
 

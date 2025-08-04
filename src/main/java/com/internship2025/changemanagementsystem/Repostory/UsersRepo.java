@@ -39,7 +39,8 @@ public class UsersRepo {
                 """;
         return jdbcTemplate.update(sql, user.getFullName(),
                 user.getEmail(), user.getPassword(),
-                user.getPhone(), user.getRolesId(), user.getRolesId()) > 0;
+                user.getPhone(), user.getRolesId(),
+                user.getUsersId()) > 0;
     }
 
 

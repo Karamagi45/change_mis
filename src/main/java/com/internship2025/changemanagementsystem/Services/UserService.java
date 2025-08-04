@@ -46,10 +46,10 @@ public class UserService implements Constant {
                 return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE).build();
             } else {
                 System.out.println("users update failed");
-                return ApiResponse.builder().message(FAILED_MESSAGE).build();
+                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
             }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
             log.error(e.getMessage(), e);
             return ApiResponse.builder().message(EXCEPTION_MESSAGE).build();
         }

@@ -36,6 +36,25 @@ public class ChangeDetailService implements Constant {
     }
 
 
+    public  ApiResponse<?> getChangeDetailById(Integer changeRequestId) {
+        try {
+            if(changeRequestId == null){
+                return ApiResponse.builder().code(FAILED_CODE).message("change_request_id required").build();
+            }
+
+            ChangeDetail dd = changeDetailRepo.findChangeDetailById(changeRequestId);
+            if (dd != null) {
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
+                        .data(dd).build();
+            }else
+                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
+        }
+    }
+
+
     public ApiResponse<?> updateChangeDetail(ChangeDetail detail) {
         try {
             if(detail.getChangeRequestId()==null)

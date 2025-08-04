@@ -30,6 +30,12 @@ public class UserRolesController {
         return usersRolesService.getUserRoles();
     }
 
+    @GetMapping("getUserRolesById/{usersRolesId}")
+    public  ApiResponse<?> getUserRolesById(@PathVariable  Integer usersRolesId) {
+        return usersRolesService.getUserRolesById(usersRolesId);
+    }
+
+
     @DeleteMapping("deleteUserRoles")
     public ApiResponse<?> deleteUserRoles(@RequestBody UsersRolesDto usersRolesDto) {
         return usersRolesService.deleteUserRoles(usersRolesDto);

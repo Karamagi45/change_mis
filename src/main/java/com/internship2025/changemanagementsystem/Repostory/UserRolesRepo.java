@@ -19,19 +19,11 @@ public class UserRolesRepo {
 
     public boolean createUserRoles(UsersRolesDto usersRolesDto) {
         String sql = """
-                insert into roles_table(role_name,roles_status) values(?,?)
+                insert into roles(role_name) values(?)
                 """;
-        return jdbcTemplate.update(sql, usersRolesDto.getRoleName(),
-                usersRolesDto.getRolesStatus()) > 0;
+        return jdbcTemplate.update(sql, usersRolesDto.getRoleName()) > 0;
     }
 
-    public boolean updateUserRoles(UsersRolesDto usersRolesDto) {
-        String sql = """
-                        update roles_table set role_name=?,roles_status=? where roles_id=?
-                """;
-        return jdbcTemplate.update(sql, usersRolesDto.getRoleName(),
-                usersRolesDto.getRolesStatus(), usersRolesDto.getRolesId()) > 0;
-    }
 
     public boolean deleteUserRoles(UsersRolesDto usersRolesDto) {
         String sql = """
@@ -40,12 +32,21 @@ public class UserRolesRepo {
         return jdbcTemplate.update(sql, usersRolesDto.getRolesId()) > 0;
     }
 
+    public  UsersRolesDto findUserRolesById(Integer rolesId) {
+        String sql = """
+                        select * from roles where roles_id=?
+        """;
+        return  jdbcTemplate.query(sql,
+                new BeanPropertyRowMapper<>(UsersRolesDto.class),
+                rolesId).stream().findFirst().orElse(null);
+    }
 
     public List<UsersRolesDto> getAllUserRoles() {
         String sql = """ 
-                select  * from roles_table;
+                select  * from roles;
                 """;
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UsersRolesDto.class));
+        return jdbcTemplate.query(sql,
+                new BeanPropertyRowMapper<>(UsersRolesDto.class));
     }
 
 }

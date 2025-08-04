@@ -9,7 +9,7 @@ public class ChangeImplementation {
 
    private Integer changeImplementationId ;
    private LocalDateTime dateTimeImplementation;
-   private String signature;
+
    private String changeImplemented;
    private String  comments ;
    private String  implementedBy;

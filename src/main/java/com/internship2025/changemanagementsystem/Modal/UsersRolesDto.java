@@ -7,5 +7,5 @@ public class UsersRolesDto {
 
     private  Integer rolesId;
     private  String roleName;
-    private  String rolesStatus;
+
 }

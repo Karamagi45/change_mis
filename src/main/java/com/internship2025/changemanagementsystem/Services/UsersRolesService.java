@@ -65,6 +65,26 @@ public class UsersRolesService implements Constant {
         }
     }
 
+
+    public  ApiResponse<?> getUserRolesById(Integer usersRolesId) {
+        try {
+            if(usersRolesId ==null){
+                return ApiResponse.builder().code(FAILED_CODE).message("rolesId is empty").build();
+            }
+            UsersRolesDto rolesDtoResponse =userRolesRepo.findUserRolesById(usersRolesId);
+            if (rolesDtoResponse != null) {
+                return ApiResponse.builder().code(SUCCESS_CODE).message(SUCCESS_MESSAGE)
+                        .data(rolesDtoResponse).build();
+            }else   {
+                return ApiResponse.builder().code(FAILED_CODE).message(FAILED_MESSAGE).build();
+            }
+
+        }catch (Exception e){
+            log.error( e.getMessage());
+            return ApiResponse.builder().code(EXCEPTION_CODE).message(EXCEPTION_MESSAGE).build();
+        }
+    }
+
     public ApiResponse<?> deleteUserRoles(UsersRolesDto usersRolesDto) {
         try {
             boolean userResponse = userRolesRepo.deleteUserRoles(usersRolesDto);

@@ -15,6 +15,10 @@ public class ChangeDetailController {
         this.changeDetailService = changeDetailService;
     }
 
+    @GetMapping("getChangeDetailById/{change_request_id}")
+    public  ApiResponse<?> getChangeDetailById(@PathVariable  Integer change_request_id){
+        return changeDetailService.getChangeDetailById(change_request_id);
+    }
 
     @PostMapping("updateChangeDetail")
     public ApiResponse<?> updateChangeDetail(@RequestBody  ChangeDetail change_detail) {

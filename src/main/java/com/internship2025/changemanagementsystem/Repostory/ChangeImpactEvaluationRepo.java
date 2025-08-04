@@ -39,15 +39,14 @@ public class ChangeImpactEvaluationRepo {
 
         return jdbcTemplate.execute((Connection conn) -> {
             try (PreparedStatement ps = conn.prepareStatement(changeSql)) {
-                ps.setString(1, evaluation.getChangePriority());
-                ps.setString(2, evaluation.getChangeImpact());
                 ps.setString(3, evaluation.getSummaryResult());
                 ps.setString(4, evaluation.getConductedBy());
                 ps.setString(5, evaluation.getImpacted());
                 ps.setInt(7,showLastKeyNumber());
 
 
-                Array typeArray = conn.createArrayOf("text", evaluation.getChangeType().toArray());
+                Array typeArray = conn.createArrayOf(
+                        "text", evaluation.getChangeType().toArray());
                 ps.setArray(6, typeArray);
 
                 if (ps != null) {

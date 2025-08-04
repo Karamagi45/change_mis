@@ -72,6 +72,17 @@ public class ChangeDetailRepo {
 
     }
 
+    public ChangeDetail findChangeDetailById(Integer changeRequestId) {
+        String sql = """
+                select *
+                from change_detail where change_request_id = ?
+                """;
+        return jdbcTemplate.query(sql,
+                new BeanPropertyRowMapper<>(ChangeDetail.class),
+                changeRequestId).stream().findFirst().orElse(null);
+
+    }
+
 
     public boolean updateChangeDetail(ChangeDetail detail) {
         String sql = "UPDATE change_detail SET source_of_change = ?, type_of_change = ?, request_by = ?, client_name = ?, " +
